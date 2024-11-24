@@ -27,9 +27,5 @@ protected:
 
 	virtual void BeginPlay() override;
 
-	void InitializeGameVariables();
-
-	void SetGameTimer();
-
 	// End Actor interface
 };

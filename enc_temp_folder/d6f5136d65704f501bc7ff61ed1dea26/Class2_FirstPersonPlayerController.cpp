@@ -16,11 +16,3 @@ void AClass2_FirstPersonPlayerController::BeginPlay()
 		Subsystem->AddMappingContext(InputMappingContext, 0);
 	}
 }
-
-void AClass2_FirstPersonPlayerController::InitializeGameVariables()
-{
-}
-
-void AClass2_FirstPersonPlayerController::SetGameTimer()
-{
-}
