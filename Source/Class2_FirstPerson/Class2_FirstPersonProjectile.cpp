@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Class2_FirstPersonProjectile.h"
+
+#include "MyCube.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 
@@ -37,7 +39,25 @@ void AClass2_FirstPersonProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+		
+		if (OtherActor)
+		{
+			AMyCube* MyCube = Cast<AMyCube>(OtherActor);
+			if (!MyCube)
+				return;
+			if (!MyCube->GetHasBeenShotOnce())  // 未被射中
+			{
+				MyCube->SetHasBeenShotOnce(true);
+				FVector fvScale = OtherComp->GetComponentScale();
+				fvScale /= MyCube->GetShotScale();
+				OtherComp->SetWorldScale3D(fvScale);
+			} else
+			{
+				OtherActor->Destroy();
+			}
+		}
 
+		// 销毁子弹
 		Destroy();
 	}
 }
