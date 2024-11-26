@@ -44,7 +44,11 @@ void UTP_WeaponComponent::Fire()
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 	
 			// Spawn the projectile at the muzzle
+			AClass2_FirstPersonProjectile* Projectile = 
 			World->SpawnActor<AClass2_FirstPersonProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+
+			// 设置所属玩家
+			Projectile->SetOwnPlayer(PlayerController);
 		}
 	}
 	
@@ -64,6 +68,11 @@ void UTP_WeaponComponent::Fire()
 			AnimInstance->Montage_Play(FireAnimation, 1.f);
 		}
 	}
+}
+
+AClass2_FirstPersonCharacter* UTP_WeaponComponent::GetCharacter()
+{
+	return Character;
 }
 
 bool UTP_WeaponComponent::AttachWeapon(AClass2_FirstPersonCharacter* TargetCharacter)

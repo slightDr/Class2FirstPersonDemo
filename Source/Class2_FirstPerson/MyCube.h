@@ -14,14 +14,17 @@ class CLASS2_FIRSTPERSON_API AMyCube : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AMyCube();
-	AMyCube(float scale);
+	AMyCube(int32 shotPoints, float scale);
 
 protected:
 	// 是否已经被射中过
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bHasBeenShotOnce;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 iShotPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fShotScale;
 
 	// Called when the game starts or when spawned
@@ -32,13 +35,19 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	// Getter
-	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	UFUNCTION(BlueprintCallable)
 	bool GetHasBeenShotOnce();
 
 	// Setter
-	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	UFUNCTION(BlueprintCallable)
 	void SetHasBeenShotOnce(bool bValue);
 
-	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	UFUNCTION(BlueprintCallable)
 	float GetShotScale();
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetShotPoints();
+
+	UFUNCTION(BlueprintCallable)
+	void SetShotPoints(int32 shotPoints);
 };

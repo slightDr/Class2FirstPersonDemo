@@ -3,6 +3,7 @@
 #include "Class2_FirstPersonProjectile.h"
 
 #include "Class2_FirstPersonGameMode.h"
+#include "Class2_FirstPersonPlayerController.h"
 #include "MyCube.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
@@ -40,26 +41,39 @@ void AClass2_FirstPersonProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+
+		// 销毁子弹
+		Destroy();
 		
 		if (OtherActor)
 		{
 			AMyCube* MyCube = Cast<AMyCube>(OtherActor);
 			if (!MyCube)
 				return;
-			if (!MyCube->GetHasBeenShotOnce())  // 未被射中
+			// 增加分数
+			GetOwnPlayer()->AddPoints(MyCube->GetShotPoints());
+
+			if (!MyCube->GetHasBeenShotOnce())  // 未被射中过
 			{
 				MyCube->SetHasBeenShotOnce(true);
 				FVector fvScale = OtherComp->GetComponentScale();
 				fvScale /= MyCube->GetShotScale();
 				OtherComp->SetWorldScale3D(fvScale);
 				
-			} else
+			} else  // 已被射中过一次
 			{
 				OtherActor->Destroy();
 			}
 		}
-
-		// 销毁子弹
-		Destroy();
 	}
+}
+
+void AClass2_FirstPersonProjectile::SetOwnPlayer(APlayerController* Player)
+{
+	OwnPlayer = Cast<AClass2_FirstPersonPlayerController>(Player);
+}
+
+AClass2_FirstPersonPlayerController* AClass2_FirstPersonProjectile::GetOwnPlayer() const
+{
+	return OwnPlayer;
 }

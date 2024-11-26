@@ -5,9 +5,18 @@
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
 
+void AClass2_FirstPersonPlayerController::AddPoints(int32 add)
+{
+	iPoints += add;
+	// GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Points: %i", iPoints);
+	UE_LOG(LogTemp, Warning, TEXT("Points: %d"), iPoints);
+}
+
 void AClass2_FirstPersonPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	iPoints = 0;
 
 	// get the enhanced input subsystem
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
@@ -15,12 +24,4 @@ void AClass2_FirstPersonPlayerController::BeginPlay()
 		// add the mapping context so we get controls
 		Subsystem->AddMappingContext(InputMappingContext, 0);
 	}
-}
-
-void AClass2_FirstPersonPlayerController::InitializeGameVariables()
-{
-}
-
-void AClass2_FirstPersonPlayerController::SetGameTimer()
-{
 }

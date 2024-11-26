@@ -49,6 +49,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	void Fire();
 
+	UFUNCTION(BlueprintCallable, Category="Getter")
+	AClass2_FirstPersonCharacter* GetCharacter();
+
 protected:
 	/** Ends gameplay for this component. */
 	UFUNCTION()

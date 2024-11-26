@@ -10,12 +10,14 @@ AMyCube::AMyCube()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	bHasBeenShotOnce = false;
+	iShotPoints = 1;
 	fShotScale = 3.0f;
 }
 
-AMyCube::AMyCube(float scale)
+AMyCube::AMyCube(int32 shotPoints, float scale)
 {
 	bHasBeenShotOnce = false;
+	iShotPoints = shotPoints;
 	fShotScale = scale;
 }
 
@@ -41,6 +43,16 @@ bool AMyCube::GetHasBeenShotOnce()
 void AMyCube::SetHasBeenShotOnce(bool bValue)
 {
 	bHasBeenShotOnce = bValue;
+}
+
+int32 AMyCube::GetShotPoints()
+{
+	return iShotPoints;
+}
+
+void AMyCube::SetShotPoints(int32 shotPoints)
+{
+	iShotPoints = shotPoints;
 }
 
 float AMyCube::GetShotScale()

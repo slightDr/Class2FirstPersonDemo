@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Class2_FirstPersonProjectile.generated.h"
 
+class AClass2_FirstPersonPlayerController;
 class USphereComponent;
 class UProjectileMovementComponent;
 
@@ -23,6 +24,7 @@ class AClass2_FirstPersonProjectile : public AActor
 	UProjectileMovementComponent* ProjectileMovement;
 
 public:
+	
 	AClass2_FirstPersonProjectile();
 
 	/** called when projectile hits something */
@@ -33,5 +35,12 @@ public:
 	USphereComponent* GetCollisionComp() const { return CollisionComp; }
 	/** Returns ProjectileMovement subobject **/
 	UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
+
+	void SetOwnPlayer(APlayerController* Player);
+	AClass2_FirstPersonPlayerController* GetOwnPlayer() const;
+
+private:
+	UPROPERTY(EditAnywhere)
+	AClass2_FirstPersonPlayerController* OwnPlayer;
 };
 
