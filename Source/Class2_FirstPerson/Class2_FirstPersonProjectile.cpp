@@ -2,6 +2,7 @@
 
 #include "Class2_FirstPersonProjectile.h"
 
+#include "Class2_FirstPersonGameMode.h"
 #include "MyCube.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
@@ -51,6 +52,7 @@ void AClass2_FirstPersonProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 				FVector fvScale = OtherComp->GetComponentScale();
 				fvScale /= MyCube->GetShotScale();
 				OtherComp->SetWorldScale3D(fvScale);
+				
 			} else
 			{
 				OtherActor->Destroy();

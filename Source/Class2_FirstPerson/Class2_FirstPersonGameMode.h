@@ -12,7 +12,18 @@ class AClass2_FirstPersonGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float fLimitTime;
+	
 	AClass2_FirstPersonGameMode();
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
+	FTimerHandle TimerHandle_GameTimeLimit; // 定义定时器句柄
+	// 用于处理时间到的逻辑
+	void OnTimeLimitReached() const;
 };
 
 
