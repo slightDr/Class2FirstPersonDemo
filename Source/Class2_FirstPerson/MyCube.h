@@ -17,9 +17,17 @@ public:
 	AMyCube(int32 shotPoints, float scale);
 
 protected:
+	// 方块的网格体组件
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* CubeMesh;
+	
 	// 是否已经被射中过
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bHasBeenShotOnce;
+
+	// 是否双倍
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsDoubled;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 iShotPoints;
@@ -33,7 +41,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
+	UFUNCTION(BlueprintCallable)
+	void InitCubeMesh();
+
 	// Getter
 	UFUNCTION(BlueprintCallable)
 	bool GetHasBeenShotOnce();

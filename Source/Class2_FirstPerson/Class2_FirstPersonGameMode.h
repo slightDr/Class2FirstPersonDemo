@@ -18,9 +18,6 @@ class AClass2_FirstPersonGameMode : public AGameModeBase
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fLimitTime;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 iDoubleNum;
 	
 	AClass2_FirstPersonGameMode();
 
@@ -32,8 +29,6 @@ private:
 	FTimerHandle TimerHandle_CubeDoubleTime;
 	// 用于处理时间到的逻辑
 	void OnTimeLimitReached() const;
-
-	void SetSomeDoubleCubes() const;
 };
 
 
