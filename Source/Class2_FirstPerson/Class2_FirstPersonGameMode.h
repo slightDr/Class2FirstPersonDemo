@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "MyCube.h"
+#include "UObject/ConstructorHelpers.h"
 #include "Class2_FirstPersonGameMode.generated.h"
+
 
 UCLASS(minimalapi)
 class AClass2_FirstPersonGameMode : public AGameModeBase
@@ -14,6 +18,9 @@ class AClass2_FirstPersonGameMode : public AGameModeBase
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fLimitTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 iDoubleNum;
 	
 	AClass2_FirstPersonGameMode();
 
@@ -22,8 +29,11 @@ protected:
 
 private:
 	FTimerHandle TimerHandle_GameTimeLimit; // 定义定时器句柄
+	FTimerHandle TimerHandle_CubeDoubleTime;
 	// 用于处理时间到的逻辑
 	void OnTimeLimitReached() const;
+
+	void SetSomeDoubleCubes() const;
 };
 
 

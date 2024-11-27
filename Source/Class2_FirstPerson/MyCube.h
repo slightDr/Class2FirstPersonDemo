@@ -50,4 +50,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetShotPoints(int32 shotPoints);
+	
+	UFUNCTION(BlueprintCallable)
+    void DoubleShotPoints();
 };
